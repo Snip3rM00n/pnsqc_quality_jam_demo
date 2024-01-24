@@ -1,5 +1,7 @@
+import sys
 from datetime import datetime
 
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -71,7 +73,7 @@ class PracticeForm(BasePage):
 
     @property
     def email(self):
-        return self._last_name_element.get_attribute("value")
+        return self._email_element.get_attribute("value")
 
     @email.setter
     def email(self, value):
@@ -115,7 +117,7 @@ class PracticeForm(BasePage):
     # region - Other Gender Element
     @property
     def _other_gender_element(self) -> CheckableElement:
-        return CheckableElement(self.driver, "gender-radio-2")
+        return CheckableElement(self.driver, "gender-radio-3")
 
     @property
     def other(self) -> bool:
@@ -174,8 +176,11 @@ class PracticeForm(BasePage):
     def date_of_birth(self, value: datetime):
         date_value = value.strftime("%d %b %Y")
         if self.date_of_birth != date_value:
-            self._date_of_birth_element.clear()
+            select_all = f"{Keys.COMMAND}A" if sys.platform == "darwin" else f"{Keys.CONTROL}A"
+            self._date_of_birth_element.send_keys(select_all)
+
             self._date_of_birth_element.send_keys(date_value)
+            self._date_of_birth_element.send_keys(Keys.ESCAPE)
 
     @property
     def _subjects_element(self) -> WebElement:
@@ -198,16 +203,6 @@ class PracticeForm(BasePage):
     @property
     def subjects(self):
         return MultiValueTextBox(self._subject_models, self._subjects_element)
-
-    # @property
-    # def subjects(self):
-    #     return self._subjects_element.get_attribute("value")
-    #
-    # @subjects.setter
-    # def subjects(self, value):
-    #     if self.subjects != value:
-    #         self._subjects_element.clear()
-    #         self._subjects_element.send_keys(value)
 
     @property
     def _sports_element(self) -> CheckableElement:
@@ -295,3 +290,24 @@ class PracticeForm(BasePage):
     @city.setter
     def city(self, value):
         self._city_select_element.select(value)
+
+    def fill_out_form(self, first_name: str, last_name: str, email: str, gender: str, phone_number: str, dob: datetime,
+                      subjects: "[str]", hobbies: "[str]", address: str, state: str, city:str):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+
+        setattr(self, gender.lower(), True)
+
+        self.mobile_number = phone_number
+        self.date_of_birth = dob
+
+        self.subjects.extend(subjects)
+
+        for hobby in hobbies:
+            if hasattr(self, hobby.lower()):
+                setattr(self, hobby.lower(), True)
+
+        self.current_address = address
+        self.state = state
+        self.city = city
