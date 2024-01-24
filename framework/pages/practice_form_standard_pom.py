@@ -1,11 +1,6 @@
-from datetime import datetime
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
-from framework.wrappers.checkable import CheckableElement
-from framework.wrappers.custom_select_element import CustomSelectElement
-from framework.wrappers.multi_value_item import MultiValueItem, MultiValueTextBox
 from selenium_essentials.core.helpers.collection_helpers import CollectionHelpers
 from selenium_essentials.core.helpers.general_helpers import GeneralHelpers
 from selenium_essentials.objects.bases.base_page import BasePage
@@ -97,8 +92,8 @@ class PracticeForm(BasePage):
     def city_element(self) -> WebElement:
         return CollectionHelpers.first_or_none(self.driver.find_elements(By.ID, "city"))
 
-    def fill_out_form(self, first_name, last_name, email, gender, phone_number, dob,
-                      subjects, hobbies, address, state, city):
+    def fill_out_form(self, first_name: str, last_name: str, email: str, gender: str, phone_number: str, dob: str,
+                      subjects: "[str]", hobbies: "[str]", address: str, state: str, city: str):
         self.first_name_element.clear()
         self.first_name_element.send_keys(first_name)
 

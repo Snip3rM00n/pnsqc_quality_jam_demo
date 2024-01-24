@@ -291,8 +291,14 @@ class PracticeForm(BasePage):
     def city(self, value):
         self._city_select_element.select(value)
 
+
+
+
+
+
+
     def fill_out_form(self, first_name: str, last_name: str, email: str, gender: str, phone_number: str, dob: datetime,
-                      subjects: "[str]", hobbies: "[str]", address: str, state: str, city:str):
+                      subjects: "[str]", hobbies: "[str]", address: str, state: str, city: str):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
