@@ -4,7 +4,7 @@ from framework.pages.practice_form_standard_pom import PracticeForm as PracticeF
 
 from selenium_essentials.core.helpers.driver_helper import DriverHelper
 
-driver = DriverHelper.get_driver("extended_chrome", install=True)
+driver = DriverHelper.get_driver("extended_chrome", install=False)
 hybrid_practice_form = PracticeForm_Hybrid(driver)
 standard_practice_form = PracticeForm_Standard(driver, navigate_to=False)
 
