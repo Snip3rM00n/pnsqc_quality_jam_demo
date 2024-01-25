@@ -1,3 +1,4 @@
+import os
 import sys
 from datetime import datetime
 
@@ -23,10 +24,22 @@ class PracticeForm(BasePage):
         return self._first_name_element is not None and self._last_name_element is not None
 
     def post_navigation_actions(self):
+        self._remove_ads()
+
         if len(self._header_group_elements) > 0:
             self._header_group_elements[0].click()
+
         GeneralHelpers.wait_for(self._ready_to_scroll, time_out_in_seconds=5, throw_on_timeout=False)
         self.driver.execute_script(script="window.scrollBy(0, 200);")
+
+    def _remove_ads(self):
+        current_dir = os.path.dirname(__file__)
+        script_file = os.path.join(current_dir, "scripts", "removeAds.js")
+
+        with open(script_file, "r") as reader:
+            script = reader.read()
+
+        self.driver.execute_script(script)
 
     @property
     def _header_group_elements(self):
