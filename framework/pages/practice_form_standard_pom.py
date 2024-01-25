@@ -49,12 +49,24 @@ class PracticeForm(BasePage):
         return CollectionHelpers.first_or_none(self.driver.find_elements(By.ID, "gender-radio-1"))
 
     @property
+    def male_gender_click_element(self) -> WebElement:
+        return CollectionHelpers.first_or_none(self.driver.find_elements_by_attribute("for", "gender-radio-1"))
+
+    @property
     def female_gender_element(self) -> WebElement:
         return CollectionHelpers.first_or_none(self.driver.find_elements(By.ID, "gender-radio-2"))
 
     @property
+    def female_gender_click_element(self) -> WebElement:
+        return CollectionHelpers.first_or_none(self.driver.find_elements_by_attribute("for", "gender-radio-2"))
+
+    @property
     def other_gender_element(self) -> WebElement:
         return CollectionHelpers.first_or_none(self.driver.find_elements(By.ID, "gender-radio-3"))
+
+    @property
+    def other_gender_click_element(self) -> WebElement:
+        return CollectionHelpers.first_or_none(self.driver.find_elements_by_attribute("for", "gender-radio-3"))
 
     @property
     def mobile_number_element(self) -> WebElement:

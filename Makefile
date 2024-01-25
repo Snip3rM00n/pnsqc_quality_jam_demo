@@ -1,4 +1,4 @@
-DEMO_FILE=./integration_example.py
+DEMO_FILE=./interactive_models.py
 
 lock:
 	poetry lock
@@ -10,5 +10,5 @@ shell:
 ifeq (,$(shell which ipython))
 	python -i $(DEMO_FILE)
 else
-	ipython -i ./integration_example.py
+	ipython -i $(DEMO_FILE)
 endif

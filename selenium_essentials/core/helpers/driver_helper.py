@@ -26,7 +26,6 @@ class DriverHelper:
 
         return [os.path.join(ext_dir, file) for file in files if file.endswith(".crx")]
 
-
     @staticmethod
     def get_driver(browser: str, install: bool = True, update: bool = True):
         driver_detail = DriverHelper.supported_browsers[browser]
@@ -43,7 +42,6 @@ class DriverHelper:
         driver = driver_detail["class"](options=options)
 
         return driver
-
 
     @staticmethod
     def _install_driver(browser_type: str, update: bool):

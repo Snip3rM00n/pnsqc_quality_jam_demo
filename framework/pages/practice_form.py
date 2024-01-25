@@ -99,6 +99,7 @@ class PracticeForm(BasePage):
     # endregion
 
     # region - Female Gender Element
+
     @property
     def _female_gender_element(self) -> CheckableElement:
         return CheckableElement(self.driver, "gender-radio-2")
@@ -127,25 +128,6 @@ class PracticeForm(BasePage):
     def other(self, value):
         if self.other != value:
             self._other_gender_element.click()
-
-    """
-    @property
-        def _other_gender_radio_element(self) -> WebElement:
-            return self.driver.find_element_by_attribute("value", "Other")
-    
-        @property
-        def _other_gender_label_element(self) -> WebElement:
-            return self.driver.find_element_by_attribute("for", "gender-radio-3")
-    
-        @property
-        def other(self) -> bool:
-            return self._other_gender_radio_element.is_selected()
-    
-        @other.setter
-        def other(self, value):
-            if self.other != value:
-                self._other_gender_label_element.click()
-    """
 
     # endregion
 
@@ -290,12 +272,6 @@ class PracticeForm(BasePage):
     @city.setter
     def city(self, value):
         self._city_select_element.select(value)
-
-
-
-
-
-
 
     def fill_out_form(self, first_name: str, last_name: str, email: str, gender: str, phone_number: str, dob: datetime,
                       subjects: "[str]", hobbies: "[str]", address: str, state: str, city: str):

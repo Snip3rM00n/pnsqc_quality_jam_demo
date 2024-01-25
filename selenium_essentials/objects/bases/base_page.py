@@ -9,21 +9,16 @@ from selenium_essentials.core.helpers.general_helpers import GeneralHelpers
 
 class BasePage:
 
-    def __init__(self, driver: "BaseExtendedWebDriver", config: dict = None, navigate_to: bool = True):
+    def __init__(self, driver: "BaseExtendedWebDriver", navigate_to: bool = True):
         self.driver = driver
-        self._config = config
 
         if navigate_to:
-            self.pre_navigation_actions()
-
             self.nagivate_to()
             GeneralHelpers.wait_for(self.page_to_load)
 
-            self.post_navigation_actions()
-
     @property
     def base_uri(self):
-        return self._config.get("base_uri")
+        return "https://demoqa.com"
 
     @property
     def relative_uri(self):
@@ -34,7 +29,9 @@ class BasePage:
         return f"{self.base_uri}/{self.relative_uri}"
 
     def nagivate_to(self):
+        self.pre_navigation_actions()
         self.driver.get(self.url)
+        self.post_navigation_actions()
 
     def page_to_load(self):
         return False

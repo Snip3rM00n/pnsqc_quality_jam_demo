@@ -29,5 +29,3 @@ class GeneralHelpers:
                 raise TimeoutError(error_message)
 
         return condition_met
-
-
